@@ -1,0 +1,8 @@
+[package]
+name = "arithmetic-expression-parser-interpreter-compiler"
+version = "0.1.0"
+authors = ["Florian Eßwein <esfl1011@h-ka.de>"]
+edition = "2021"
+description = "Ein einfacher Parser/Interpreter/Compiler für simple arithmetische Ausdrücke, geschrieben in Rust. Dies ist eine Projektarbeit an der Hochschule Karlsruhe."
+
+[dependencies]

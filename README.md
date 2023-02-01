@@ -1,0 +1,2 @@
+# Parser/Interpreter/Compiler für arithemtische Ausdrücke
+Ein einfacher Parser/Interpreter/Compiler für simple arithmetische Ausdrücke, geschrieben in Rust. Entstanden als Projektarbeit an der Hochschule Karlsruhe.
