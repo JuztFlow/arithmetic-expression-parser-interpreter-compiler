@@ -1,3 +1,4 @@
+
 mod ast;
 use ast::{new_integer_expression, new_plus_expression, new_multiplication_expression};
 pub use ast::Expression;
@@ -54,7 +55,7 @@ impl Parser {
 
     // T' ::= * F T' |
     fn parse_t2(&mut self, left: Expression) -> Option<Expression> {
-        if self.tokenizer.current_token == Token::MULTIPLY {
+        if self.tokenizer.current_token == Token::MULT {
             self.tokenizer.next_token();
             let right = self.parse_f();
             return match right {
@@ -80,6 +81,34 @@ impl Parser {
                 self.tokenizer.next_token();
                 Some(new_integer_expression(2))
             },
+            Token::THREE => {
+                self.tokenizer.next_token();
+                Some(new_integer_expression(3))
+            },
+            Token::FOUR => {
+                self.tokenizer.next_token();
+                Some(new_integer_expression(4))
+            },
+            Token::FIVE => {
+                self.tokenizer.next_token();
+                Some(new_integer_expression(5))
+            },
+            Token::SIX => {
+                self.tokenizer.next_token();
+                Some(new_integer_expression(6))
+            },
+            Token::SEVEN => {
+                self.tokenizer.next_token();
+                Some(new_integer_expression(7))
+            },
+            Token::EIGHT => {
+                self.tokenizer.next_token();
+                Some(new_integer_expression(8))
+            },
+            Token::NINE => {
+                self.tokenizer.next_token();
+                Some(new_integer_expression(9))
+            },
             Token::OPEN => {
                 self.tokenizer.next_token();
                 let expression = self.parse_e();
@@ -99,4 +128,4 @@ impl Parser {
         }
     }
 }
-        
+

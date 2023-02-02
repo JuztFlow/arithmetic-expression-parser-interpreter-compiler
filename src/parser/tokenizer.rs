@@ -5,10 +5,17 @@ pub enum Token {
     ZERO,
     ONE,
     TWO,
+    THREE,
+    FOUR,
+    FIVE,
+    SIX,
+    SEVEN,
+    EIGHT,
+    NINE,
     OPEN,
     CLOSE,
     PLUS,
-    MULTIPLY,
+    MULT,
 }
 
 #[allow(dead_code)]
@@ -18,10 +25,17 @@ pub fn show_token(token: Token) -> String {
         Token::ZERO     => "ZERO".to_string(),
         Token::ONE      => "ONE".to_string(),
         Token::TWO      => "TWO".to_string(),
+        Token::THREE    => "THREE".to_string(),
+        Token::FOUR     => "FOUR".to_string(),
+        Token::FIVE     => "FIVE".to_string(),
+        Token::SIX      => "SIX".to_string(),
+        Token::SEVEN    => "SEVEN".to_string(),
+        Token::EIGHT    => "EIGHT".to_string(),
+        Token::NINE     => "NINE".to_string(),
         Token::OPEN     => "OPEN".to_string(),
         Token::CLOSE    => "CLOSE".to_string(),
         Token::PLUS     => "PLUS".to_string(),
-        Token::MULTIPLY => "MULTIPLY".to_string(),
+        Token::MULT     => "MULT".to_string(),
     }
 }
 
@@ -84,6 +98,34 @@ impl Tokenize {
                     self.position += 1;
                     return Token::TWO;
                 }
+                '3' => {
+                    self.position += 1;
+                    return Token::THREE;
+                }
+                '4' => {
+                    self.position += 1;
+                    return Token::FOUR;
+                }
+                '5' => {
+                    self.position += 1;
+                    return Token::FIVE;
+                }
+                '6' => {
+                    self.position += 1;
+                    return Token::SIX;
+                }
+                '7' => {
+                    self.position += 1;
+                    return Token::SEVEN;
+                }
+                '8' => {
+                    self.position += 1;
+                    return Token::EIGHT;
+                }
+                '9' => {
+                    self.position += 1;
+                    return Token::NINE;
+                }  
                 '(' => {
                     self.position += 1;
                     return Token::OPEN;
@@ -98,7 +140,7 @@ impl Tokenize {
                 }
                 '*' => {
                     self.position += 1;
-                    return Token::MULTIPLY;
+                    return Token::MULT;
                 }
                 _ => {
                     self.position += 1;

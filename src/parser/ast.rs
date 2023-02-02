@@ -1,8 +1,8 @@
 
 pub enum Expression {
-    IntegerExpression(i64),
-    PlusExpression(Box<Expression>, Box<Expression>),
-    MultiplicationExpression(Box<Expression>, Box<Expression>),
+    Integer(i64),
+    Plus(Box<Expression>, Box<Expression>),
+    Multiply(Box<Expression>, Box<Expression>),
 }
 
 impl Expression {
@@ -10,16 +10,16 @@ impl Expression {
     #[allow(dead_code)]
     pub fn evaluate(&self) -> i64 {
         match self {
-            Expression::IntegerExpression(value) => *value,
-            Expression::PlusExpression(left, right) => left.evaluate() + right.evaluate(),
-            Expression::MultiplicationExpression(left, right) => left.evaluate() * right.evaluate(),
+            Expression::Integer(value) => *value,
+            Expression::Plus(left, right) => left.evaluate() + right.evaluate(),
+            Expression::Multiply(left, right) => left.evaluate() * right.evaluate(),
         }
     }
 
     #[allow(dead_code)]
     pub fn is_integer_expression(&self) -> bool {
         match self {
-            Expression::IntegerExpression(_) => true,
+            Expression::Integer(_) => true,
             _ => false,
         }
     }
@@ -27,7 +27,7 @@ impl Expression {
     #[allow(dead_code)]
     fn is_plus_expression(&self) -> bool {
         match self {
-            Expression::PlusExpression(_, _) => true,
+            Expression::Plus(_, _) => true,
             _ => false,
         }
     }
@@ -35,56 +35,65 @@ impl Expression {
     #[allow(dead_code)]
     fn is_multiplication_expression(&self) -> bool {
         match self {
-            Expression::MultiplicationExpression(_, _) => true,
+            Expression::Multiply(_, _) => true,
             _ => false,
         }
     }
 
+    #[allow(dead_code)]
     pub fn to_string(&self) -> String {
         match self {
-            Expression::IntegerExpression(value) => value.to_string(),
-            Expression::PlusExpression(left, right) => format!("({}+{})", left.to_string(), right.to_string()),
-            Expression::MultiplicationExpression(left, right) => format!("({}*{})", left.to_string(), right.to_string()),
+            Expression::Integer(value) => value.to_string(),
+            Expression::Plus(left, right) => format!("({}+{})", left.to_string(), right.to_string()),
+            Expression::Multiply(left, right) => format!("({}*{})", left.to_string(), right.to_string()),
         }
     }
 
+    #[allow(dead_code, unused_variables)]
     pub fn to_string_pretty(&self) -> String {
 
-        // TODO: Teilaufgabe 3: SYNTAX: Implement this method
-        // Hint: Use `match self { ... }` to match the type of the expression
-        // Hint: Use the methods `is_integer_expression()`, `is_plus_expression()`, `is_multiplication_expression()` to check the type of the expression
+        /*   
+         *   TODO: Teilaufgabe 3: SYNTAX: Implement this method
+         *
+         *   Hints:
+         *      - Use `match self { ... }` to match the type of the expression, and return the corresponding string per case
+         *      - This function needs to be recursive, because the expression can be arbitrarily nested
+         *      - The methods `is_integer_expression()`, `is_plus_expression()` and/or `is_multiplication_expression()` might be useful to determine the correct parentheses
+         */
 
-        self.to_string() // <- Replace this with the correct implementation
+        self.to_string() // <- Replace this with you solution!
 
-        /*** Possible Solution: ***/
-        /*
-         * match self {
-         *     Expression::IntegerExpression(value) => value.to_string_pretty(),
-         *     Expression::PlusExpression(left, right) => format!("{}+{}", left.to_string_pretty(), right.to_string_pretty()),
-         *     Expression::MultiplicationExpression(left, right) => {
-         *         if left.is_plus_expression() && right.is_plus_expression() {
-         *             format!("({})*({})", left.to_string_pretty(), right.to_string_pretty())
-         *         } else if left.is_plus_expression() {
-         *             format!("({})*{}", left.to_string_pretty(), right.to_string_pretty())
-         *         } else if right.is_plus_expression() {
-         *             format!("{}*({})", left.to_string_pretty(), right.to_string_pretty())
-         *         } else {
-         *             format!("{}*{}", left.to_string_pretty(), right.to_string_pretty())
-         *         }
-         *     }
-         * }
+        /*   
+         *   Possible Solution:
+         *
+         *   match self {
+         *       Expression::Integer(value) => value.to_string_pretty(),
+         *       Expression::Plus(left, right) => format!("{}+{}", left.to_string_pretty(), right.to_string_pretty()),
+         *       Expression::Multiply(left, right) => {
+         *           if left.is_plus_expression() && right.is_plus_expression() {
+         *               format!("({})*({})", left.to_string_pretty(), right.to_string_pretty())
+         *           } else if left.is_plus_expression() {
+         *               format!("({})*{}", left.to_string_pretty(), right.to_string_pretty())
+         *           } else if right.is_plus_expression() {
+         *               format!("{}*({})", left.to_string_pretty(), right.to_string_pretty())
+         *           } else {
+         *               format!("{}*{}", left.to_string_pretty(), right.to_string_pretty())
+         *           }
+         *       }
+         *   }
          */
     }
 }
 
 pub fn new_integer_expression(value: i64) -> Expression {
-    Expression::IntegerExpression(value)
+    Expression::Integer(value)
 }
 
 pub fn new_plus_expression(left: Expression, right: Expression) -> Expression {
-    Expression::PlusExpression(Box::new(left), Box::new(right))
+    Expression::Plus(Box::new(left), Box::new(right))
 }
 
 pub fn new_multiplication_expression(left: Expression, right: Expression) -> Expression {
-    Expression::MultiplicationExpression(Box::new(left), Box::new(right))
+    Expression::Multiply(Box::new(left), Box::new(right))
 }
+
