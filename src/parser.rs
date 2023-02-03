@@ -18,12 +18,12 @@ impl Parser {
         }
     }
     
-    pub fn parse(&mut self) -> Option<Expression> {
+    pub fn parse(self: &mut Parser) -> Option<Expression> {
         self.parse_e()
     }
 
     // E  ::= T E'
-    fn parse_e(&mut self) -> Option<Expression> {
+    fn parse_e(self: &mut Parser) -> Option<Expression> {
         let t = self.parse_t();
         match t {
             Some(t) => self.parse_e2(t),
@@ -32,7 +32,7 @@ impl Parser {
     }
 
     // E' ::= + T E' |
-    fn parse_e2(&mut self, left: Expression) -> Option<Expression> {
+    fn parse_e2(self: &mut Parser, left: Expression) -> Option<Expression> {
         if self.tokenizer.current_token == Token::PLUS {
             self.tokenizer.next_token();
             let right = self.parse_t();
@@ -45,7 +45,7 @@ impl Parser {
     }
 
     // T  ::= F T'
-    fn parse_t(&mut self) -> Option<Expression> {
+    fn parse_t(self: &mut Parser) -> Option<Expression> {
         let f = self.parse_f();
         match f {
             Some(f) => self.parse_t2(f),
@@ -54,7 +54,7 @@ impl Parser {
     }
 
     // T' ::= * F T' |
-    fn parse_t2(&mut self, left: Expression) -> Option<Expression> {
+    fn parse_t2(self: &mut Parser, left: Expression) -> Option<Expression> {
         if self.tokenizer.current_token == Token::MULT {
             self.tokenizer.next_token();
             let right = self.parse_f();
@@ -67,7 +67,7 @@ impl Parser {
     }
 
     // F ::= N | (E)
-    fn parse_f(&mut self) -> Option<Expression> {
+    fn parse_f(self: &mut Parser) -> Option<Expression> {
         match self.tokenizer.current_token {
             Token::ZERO => {
                 self.tokenizer.next_token();

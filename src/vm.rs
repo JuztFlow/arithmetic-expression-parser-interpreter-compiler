@@ -14,15 +14,15 @@ impl Instruction {
 
     fn new_nullary(op_code: OpCode) -> Instruction {
         Instruction {
-            op_code: op_code,
+            op_code,
             value: 0,
         }
     }
 
     fn new_unary(op_code: OpCode, value: i64) -> Instruction {
         Instruction {
-            op_code: op_code,
-            value: value,
+            op_code,
+            value,
         }
     }
 
@@ -48,12 +48,12 @@ impl VM {
 
     pub fn new(instructions: Vec<Instruction>) -> VM {
         VM {
-            instructions: instructions,
+            instructions,
             stack: Vec::new(),
         }
     }
 
-    pub fn run(&mut self) -> Option<i64> {
+    pub fn run(self: &mut VM) -> Option<i64> {
         for instruction in &self.instructions {
             match instruction.op_code {
                 OpCode::PUSH => self.stack.push(instruction.value),

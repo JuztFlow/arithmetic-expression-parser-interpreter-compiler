@@ -50,12 +50,12 @@ impl Tokenizer {
         let mut tokenize = Tokenize::new(input);
         let current_token = tokenize.next();
         Tokenizer {
-            tokenize: tokenize,
-            current_token: current_token,
+            tokenize,
+            current_token,
         }
     }
 
-    pub fn next_token(&mut self) {
+    pub fn next_token(self: &mut Tokenizer) {
         self.current_token = self.tokenize.next();
     }
 
@@ -79,7 +79,7 @@ impl Tokenize {
         }
     }
 
-    fn next(&mut self) -> Token {
+    fn next(self: &mut Tokenize) -> Token {
         loop {
             if self.input.len() <= self.position {
                 return Token::EOS;
@@ -149,7 +149,7 @@ impl Tokenize {
         }
     }
 
-    fn scan(&mut self) -> Vec<Token> {
+    fn scan(self: &mut Tokenize) -> Vec<Token> {
         let mut tokens = Vec::new();
         loop {
             let token = self.next();
@@ -161,7 +161,7 @@ impl Tokenize {
         tokens
     }
 
-    fn show(&mut self) -> String {
+    fn show(self: &mut Tokenize) -> String {
         let tokens = self.scan();
         let mut string = String::new();
         for i in 0..tokens.len() {
