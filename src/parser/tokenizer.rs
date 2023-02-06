@@ -1,3 +1,4 @@
+/* Author: Florian Eßwein, esfl1011@h-ka.de */
 
 #[derive(PartialEq, Clone)]
 pub enum Token {

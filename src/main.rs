@@ -1,3 +1,4 @@
+/* Author: Florian Eßwein, esfl1011@h-ka.de */
 
 mod parser;
 use parser::{Parser, Expression};
@@ -25,7 +26,7 @@ fn display_parser_result(expression: Option<Expression>) {
 
 fn test_parser() {
 
-    println!("\nParser (Teilaufgabe 3: SYNTAX):");
+    println!("\nParser (SYNTAX):");
 
     display_parser_result(Parser::new("1").parse());
 
@@ -59,7 +60,7 @@ fn display_vm_result(result: Option<i64>) {
 
 fn test_vm() {
 
-    println!("\nVM (Teilaufgabe 3: SEMANTIK):");
+    println!("\nVM (SEMANTIK):");
     
     let instructions = vec![
         Instruction::new_push(1),
@@ -97,7 +98,7 @@ fn expression_to_instructions(expression: Option<Expression>) -> Vec<Instruction
      *   Hints:
      *      - Use `match expression { ... }` to match the expression, and return the corresponding instruction(s) per case
      *      - Again, this function needs to be recursive, because the expression can be arbitrarily nested
-     *      - Note that the order of the instructions is important here, because the VM pops the stack in reverse order (last in, first out)
+     *      - Note that the order of instructions is important here, because the corresponding operations follow after their operands
      *      - You can use the `new_push()`, `new_plus()` and `new_mult()` methods of the `Instruction` struct to create the necessary instructions
      */
 

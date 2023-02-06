@@ -1,3 +1,4 @@
+/* Author: Florian Eßwein, esfl1011@h-ka.de */
 
 pub enum Expression {
     Integer(i64),
@@ -8,7 +9,31 @@ pub enum Expression {
 impl Expression {
 
     #[allow(dead_code)]
-    pub fn evaluate(&self) -> i64 {
+    pub fn is_integer_expression(self: &Expression) -> bool {
+        match self {
+            Expression::Integer(_) => true,
+            _ => false,
+        }
+    }
+
+    #[allow(dead_code)]
+    fn is_plus_expression(self: &Expression) -> bool {
+        match self {
+            Expression::Plus(_, _) => true,
+            _ => false,
+        }
+    }
+
+    #[allow(dead_code)]
+    fn is_multiplication_expression(self: &Expression) -> bool {
+        match self {
+            Expression::Multiply(_, _) => true,
+            _ => false,
+        }
+    }
+
+    #[allow(dead_code)]
+    pub fn evaluate(self: &Expression) -> i64 {
         match self {
             Expression::Integer(value) => *value,
             Expression::Plus(left, right) => left.evaluate() + right.evaluate(),
@@ -17,31 +42,7 @@ impl Expression {
     }
 
     #[allow(dead_code)]
-    pub fn is_integer_expression(&self) -> bool {
-        match self {
-            Expression::Integer(_) => true,
-            _ => false,
-        }
-    }
-
-    #[allow(dead_code)]
-    fn is_plus_expression(&self) -> bool {
-        match self {
-            Expression::Plus(_, _) => true,
-            _ => false,
-        }
-    }
-
-    #[allow(dead_code)]
-    fn is_multiplication_expression(&self) -> bool {
-        match self {
-            Expression::Multiply(_, _) => true,
-            _ => false,
-        }
-    }
-
-    #[allow(dead_code)]
-    pub fn to_string(&self) -> String {
+    pub fn to_string(self: &Expression) -> String {
         match self {
             Expression::Integer(value) => value.to_string(),
             Expression::Plus(left, right) => format!("({}+{})", left.to_string(), right.to_string()),
@@ -50,7 +51,7 @@ impl Expression {
     }
 
     #[allow(dead_code, unused_variables)]
-    pub fn to_string_pretty(&self) -> String {
+    pub fn to_string_pretty(self: &Expression) -> String {
 
         /*   
          *   TODO: Teilaufgabe 3: SYNTAX: Implement this method

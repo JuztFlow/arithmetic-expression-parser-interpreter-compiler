@@ -1,3 +1,4 @@
+/* Author: Florian Eßwein, esfl1011@h-ka.de */
 
 enum OpCode {
     PUSH,
@@ -70,9 +71,9 @@ impl VM {
             }
         }
         if self.stack.len() == 0 {
-            None
+            return None;
         } else {
-            self.stack.pop()
+            return self.stack.pop();
         }
     }
 }
